@@ -6,10 +6,14 @@
         3. `php artisan migrate`
         
     - install Passport For Production : [✅]
-        1. `php artisan install:api --passport`
-        2. `php artisan passport:keys`
-        3. `php artisan vendor:publish --tag=passport-config`
+        1. `composer require laravel/passport`
+        2. `php artisan install:api --passport`
+        3. `php artisan passport:install`
+        4. `php artisan passport:keys`
+        5. `php artisan vendor:publish --tag=passport-config`
+        6. `php artisan passport:client --personal`
 
+        
     - install Socialite : [✅]
         1. `composer require laravel/socialite`
         2. add in File config/services.php : 
@@ -20,4 +24,3 @@
             'redirect' => 'http://example.com/callback-url',
         ],
         ```
-        

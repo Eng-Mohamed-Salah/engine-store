@@ -34,8 +34,8 @@ class AuthController extends Controller
 
         // Return Response
         return response()->json([
-            'access_token' => $token,
             'user' => $user,
+            'access_token' => $token
         ], 201);
     }
 
@@ -51,17 +51,18 @@ class AuthController extends Controller
         $user = Admin::where('email', $validatedData['email'])->first();
 
         // Check Password And Login
-        if(!$user || !$user->checkPassword($validatedData['password'])){
+        if(!$user || !Hash::check($validatedData['password'], $user->password)){
             return response()->json(['message'=>'Invalid Credentials'], 401);
         }
+
 
         // Generate Token For Login User
         $token = $user->createToken('auth_token')->accessToken;
 
         // Return Response
         return response()->json([
-            'access_token' => $token ,
-            'user' => $user
+            'user' => $user,
+            'access_token' => $token
         ],200);
     }
 }
